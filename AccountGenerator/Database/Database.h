@@ -111,7 +111,7 @@ namespace AccountDatabase {
 				return false;
 		}
 
-		virtual mic::List<std::string_view> GetCMDs() const
+		virtual mtk::List<std::string_view> GetCMDs() const
 		{
 			return {
 				"registry",
@@ -174,7 +174,7 @@ namespace AccountDatabase {
 
 		bool RemoveUser(const std::string& _input)
 		{
-			auto _params = mic::Split(_input, ' ');
+			auto _params = mtk::Split(_input, ' ');
 
 			auto data = _params[1];
 			for (ID i = 0; i < m_EntryCount; i++) {
@@ -193,7 +193,7 @@ namespace AccountDatabase {
 			if (in) {
 				std::string entryData;
 				while (std::getline(in, entryData)) {
-					auto objectData = mic::Split(entryData);
+					auto objectData = mtk::Split(entryData);
 					_ModelType dataObj;
 					dataObj.FromString(m_EntryCount, objectData);
 					Add(std::move(dataObj));
@@ -214,7 +214,7 @@ namespace AccountDatabase {
 
 		bool ToFile(const std::string& _cmd) const
 		{
-			auto path = mic::Split(_cmd)[1];
+			auto path = mtk::Split(_cmd)[1];
 
 			std::ofstream out(path.data(), std::ios::out);
 			if (out) {
@@ -231,7 +231,7 @@ namespace AccountDatabase {
 
 	private:
 		ID m_EntryCount = 0;
-		mic::Map<ID, _ModelType> m_Registry;
+		mtk::Map<ID, _ModelType> m_Registry;
 		std::string m_OutputPath;
 	};
 }

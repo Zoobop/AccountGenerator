@@ -14,7 +14,7 @@ public:
 	const std::string& GetUsername() const { return m_Username; }
 	const std::string& GetPassword() const { return m_Password; }
 
-	virtual void FromString(AccountDatabase::ID _id, const mic::List<std::string_view>& _contents) override
+	virtual void FromString(AccountDatabase::ID _id, const mtk::List<std::string_view>& _contents) override
 	{
 		m_ID = _id;
 		m_Email = _contents[0];
@@ -22,7 +22,7 @@ public:
 		m_Password = _contents[2];
 	}
 
-	virtual void FromString(AccountDatabase::ID _id, const mic::List<const char*>& _contents) override
+	virtual void FromString(AccountDatabase::ID _id, const mtk::List<const char*>& _contents) override
 	{
 		m_ID = _id;
 		m_Email = _contents[0];

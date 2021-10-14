@@ -16,8 +16,8 @@ namespace AccountDatabase {
 		{
 		}
 
-		virtual void FromString(ID _id, const mic::List<std::string_view>& _data) = 0;
-		virtual void FromString(ID _id, const mic::List<const char*>& _data) = 0;
+		virtual void FromString(ID _id, const mtk::List<std::string_view>& _data) = 0;
+		virtual void FromString(ID _id, const mtk::List<const char*>& _data) = 0;
 
 		const ID& GetID() const { return m_ID; }
 
