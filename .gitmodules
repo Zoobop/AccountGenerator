@@ -1,0 +1,3 @@
+[submodule "MicroLib"]
+	path = MicroLib
+	url = https://github.com/Zoobop/MicroLibrary
