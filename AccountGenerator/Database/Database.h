@@ -8,8 +8,7 @@
 #include "DebugUtils/Log.h"
 #include "Utility/StringUtils.h"
 
-
-#define PATH					"C:\\Users\\Brandon\\OneDrive\\Desktop\\Code\\C++\\AccountGenerator\\AccountGenerator\\Output\\database.txt"
+#define PATH					__HOME__
 #define DEFAULT_MEMBER_COUNT	10
 
 namespace AccountDatabase {
@@ -20,6 +19,11 @@ namespace AccountDatabase {
 	public:
 		SimpleDatabase()
 		{
+			auto hash = [](ID id)
+			{
+				return id;
+			};
+			m_Registry.SetHash(hash);
 		}
 
 		bool Add(const _ModelType& _modelObj)
@@ -131,7 +135,7 @@ namespace AccountDatabase {
 				PROMPT("Enter Email: ");
 				std::string email;
 				std::getline(std::cin, email);
-				if (email.size() < 1) {
+				if (email.empty()) {
 					LOG("Invalid Email!\n");
 					continue;
 				}
@@ -139,7 +143,7 @@ namespace AccountDatabase {
 				PROMPT("Enter Username: ");
 				std::string username;
 				std::getline(std::cin, username);
-				if (username.size() < 1) {
+				if (username.empty()) {
 					LOG("Invalid Username!\n");
 					continue;
 				}

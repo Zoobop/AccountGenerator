@@ -3,7 +3,6 @@
 #include "Database/Database.h"
 #include "Utility/Tuple.h"
 
-
 class CMD
 {
 public:
@@ -13,8 +12,9 @@ public:
 		db.ImportPath(PATH);
 		LinkCommands(db);
 
+		LOG(__DATE__ << ":");
 		while (true)
-		{
+		{			
 			PROMPT("<management> ");
 
 			std::string input;
@@ -40,7 +40,7 @@ private:
 
 	void DisplayCmds()
 	{
-		for (auto& cmd : m_Cmds)
+		for (const auto& cmd : m_Cmds)
 			LOG(cmd);
 	}
 
