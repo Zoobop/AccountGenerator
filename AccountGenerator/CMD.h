@@ -51,11 +51,10 @@ private:
 			DisplayCmds();
 			return true;
 		}
-		else if (_input == "exit") {
+		if (_input == "exit") {
 			exit(0);
 		}
-		else
-			return _database.ValidateCMD(_input);
+		return _database.ValidateCMD(_input);
 	}
 
 private:
