@@ -54,11 +54,8 @@ private:
 		else if (_input == "exit") {
 			exit(0);
 		}
-		else if (_database.ValidateCMD(_input)) {
-			return true;
-		}
 		else
-			return false;
+			return _database.ValidateCMD(_input);
 	}
 
 private:
