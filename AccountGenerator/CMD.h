@@ -45,11 +45,22 @@ private:
 			LOG(cmd);
 	}
 
+	void ClearScreen() 
+	{
+		system("cls");
+		LOG(__DATE__);
+		PROMPT("Type \'help\' to see the list of commands.");
+	}
+
 	template<typename _Model>
 	bool CheckInput(const std::string& _input, AccountDatabase::SimpleDatabase<_Model>& _database)
 	{
 		if (_input == "help") {
 			DisplayCmds();
+			return true;
+		}
+		if (_input == "clear") {
+			ClearScreen();
 			return true;
 		}
 		if (_input == "exit") {
@@ -61,6 +72,7 @@ private:
 private:
 	mtk::List<std::string_view> m_Cmds = {
 		"help",
+		"clear",
 		"exit",
 	};
 };
