@@ -1,28 +1,21 @@
 #pragma once
 #include "Database/Model.h"
 
-class User : public AccountDatabase::Model
+class User final : public AccountDatabase::Model
 {
 public:
 	User() = default;
-	User(AccountDatabase::ID _id, const std::string& _email, const std::string& _username, const std::string& _password)
-		: Model{ _id }, m_Email(_email), m_Username(_username), m_Password(_password)
+	User(AccountDatabase::ID _id, std::string _email, std::string _username, std::string _password)
+		: Model{ _id }, m_Email(std::move(_email)), m_Username(std::move(_username)), m_Password(std::move(_password))
 	{
 	}
+	~User() override = default;
 
-	const std::string& GetEmail() const { return m_Email; }
-	const std::string& GetUsername() const { return m_Username; }
-	const std::string& GetPassword() const { return m_Password; }
+	[[nodiscard]] const std::string& GetEmail() const { return m_Email; }
+	[[nodiscard]] const std::string& GetUsername() const { return m_Username; }
+	[[nodiscard]] const std::string& GetPassword() const { return m_Password; }
 
-	virtual void FromString(AccountDatabase::ID _id, const mtk::List<std::string_view>& _contents) override
-	{
-		m_ID = _id;
-		m_Email = _contents[0];
-		m_Username = _contents[1];
-		m_Password = _contents[2];
-	}
-
-	virtual void FromString(AccountDatabase::ID _id, const mtk::List<const char*>& _contents) override
+	void FromString(AccountDatabase::ID _id, const mtk::List<std::string_view>& _contents) override
 	{
 		m_ID = _id;
 		m_Email = _contents[0];
@@ -30,7 +23,15 @@ public:
 		m_Password = _contents[2];
 	}
 
-	virtual std::string ToString() const override
+	void FromString(AccountDatabase::ID _id, const mtk::List<const char*>& _contents) override
+	{
+		m_ID = _id;
+		m_Email = _contents[0];
+		m_Username = _contents[1];
+		m_Password = _contents[2];
+	}
+
+	[[nodiscard]] std::string ToString() const override
 	{
 		return m_Email + " " + m_Username + " " + m_Password;
 	}

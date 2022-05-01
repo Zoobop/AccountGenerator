@@ -12,7 +12,7 @@ public:
 		db.ImportPath(PATH);
 		LinkCommands(db);
 
-		LOG(__DATE__ << ":");
+		LOG(__DATE__);
 		while (true)
 		{			
 			PROMPT("<management> ");

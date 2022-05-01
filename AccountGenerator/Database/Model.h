@@ -10,6 +10,7 @@ namespace AccountDatabase {
 	class Model
 	{
 	public:
+		virtual ~Model() = default;
 		Model() = default;
 		Model(ID _id)
 			: m_ID(_id)
@@ -26,5 +27,4 @@ namespace AccountDatabase {
 	protected:
 		ID m_ID = 0;
 	};
-
 }

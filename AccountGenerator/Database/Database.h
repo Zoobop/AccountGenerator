@@ -18,12 +18,8 @@ namespace AccountDatabase {
 	{
 	public:
 		SimpleDatabase()
+			: m_Registry([](ID id) { return id; })
 		{
-			auto hash = [](ID id)
-			{
-				return id;
-			};
-			m_Registry.SetHash(hash);
 		}
 
 		bool Add(const _ModelType& _modelObj)
@@ -42,10 +38,9 @@ namespace AccountDatabase {
 
 			if (m_EntryCount < 1) {
 				LOG("No objects in registry!");
+				return;
 			}
-			else {
-				std::cout << "Commited objects to registry: " << m_EntryCount << " Entries\n";
-			}
+			std::cout << "Commited objects to registry: " << m_EntryCount << " Entries\n";
 		}
 
 		void ClearDatabase()
@@ -71,11 +66,9 @@ namespace AccountDatabase {
 				LOG("No entries in the registry!");
 				return;
 			}
-			else {
-				for (ID i = 0; i < m_EntryCount; i++) {
-					auto user = m_Registry.At(i);
-					LOG(user);
-				}
+			for (ID i = 0; i < m_EntryCount; i++) {
+				auto user = m_Registry.At(i);
+				LOG(user);
 			}
 		}
 
@@ -93,26 +86,25 @@ namespace AccountDatabase {
 				PrintRegistry();
 				return true;
 			}
-			else if (_cmd == "count") {
+			if (_cmd == "count") {
 				PROMPT("Number of users: ");
 				LOG(m_EntryCount);
 				return true;
 			}
-			else if (_cmd == "add") {
+			if (_cmd == "add") {
 				return CreateUser();
 			}
-			else if (_cmd == "remove") {
+			if (_cmd == "remove") {
 				return RemoveUser(_cmd);
 			}
-			else if (_cmd == "commit") {
+			if (_cmd == "commit") {
 				Commit();
 				return true;
 			}
-			else if (std::string_view(_cmd.c_str(), 6) == "export") {
+			if (std::string_view(_cmd.c_str(), 6) == "export") {
 				return ToFile(_cmd);
 			}
-			else
-				return false;
+			return false;
 		}
 
 		virtual mtk::List<std::string_view> GetCMDs() const
