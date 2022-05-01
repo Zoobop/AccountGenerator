@@ -13,6 +13,7 @@ public:
 		LinkCommands(db);
 
 		LOG(__DATE__);
+		LOG("Type \'help\' to see the list of commands.");
 		while (true)
 		{			
 			PROMPT("<management> ");
