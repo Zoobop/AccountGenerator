@@ -39,7 +39,7 @@ private:
 		}
 	}
 
-	void DisplayCmds()
+	void DisplayCmds()		
 	{
 		for (const auto& cmd : m_Cmds)
 			LOG(cmd);
