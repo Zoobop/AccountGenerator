@@ -1,8 +1,8 @@
 #pragma once
 #include "Model.h"
 #include "FileHandler.h"
+#include "Generator.h"
 
-#include "Structures/List.h"
 #include "Structures/Map.h"
 #include "DebugUtils/Timer.h"
 #include "DebugUtils/Log.h"
@@ -104,6 +104,9 @@ namespace AccountDatabase {
 			if (std::string_view(_cmd.c_str(), 6) == "export") {
 				return ToFile(_cmd);
 			}
+			if (std::string_view(_cmd.c_str(), 8) == "generate") {
+				return Generate(_cmd);
+			}
 			return false;
 		}
 
@@ -115,7 +118,8 @@ namespace AccountDatabase {
 				"add",
 				"remove",
 				"commit",
-				"export"
+				"export",
+				"generate"
 			};
 		}
 
@@ -222,6 +226,41 @@ namespace AccountDatabase {
 				return true;
 			}
 			LOG("Export failed: No such file found!");
+			return false;
+		}
+
+		bool Generate(const std::string& _cmd)
+		{
+			auto cmd = mtk::Split(_cmd);
+
+			if (cmd.Size() == 2)
+			{
+				auto arg = std::string(cmd[1]);
+				auto count = 0;
+
+				if (mtk::TryParse(arg, count))
+				{
+					for (auto i = 0; i < count; i++)
+					{
+						const auto email = Generator::GenerateEmail();
+						const auto user = Generator::GenerateUsername();
+						const auto password = Generator::GeneratePassword();
+						mtk::List<std::string_view> objectData =
+						{
+							email,
+							user,
+							password
+						};
+
+						auto dataObj = _ModelType();
+						dataObj.FromString(m_EntryCount, objectData);
+						Add(std::move(dataObj));
+					}
+					LOGF("Successfully generated %i accounts!", count);
+					return true;
+				}
+				LOGF("Invalid argument: \'%s\'", arg.data());
+			}
 			return false;
 		}
 

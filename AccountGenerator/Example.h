@@ -23,6 +23,14 @@ public:
 		m_Password = _contents[2];
 	}
 
+	void FromString(AccountDatabase::ID _id, const mtk::List<std::string>& _contents) override
+	{
+		m_ID = _id;
+		m_Email = _contents[0];
+		m_Username = _contents[1];
+		m_Password = _contents[2];
+	}
+
 	void FromString(AccountDatabase::ID _id, const mtk::List<const char*>& _contents) override
 	{
 		m_ID = _id;

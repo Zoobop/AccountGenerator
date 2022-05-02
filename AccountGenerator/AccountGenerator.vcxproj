@@ -16,6 +16,7 @@
     <ClInclude Include="Database\FileHandler.h" />
     <ClInclude Include="Database\Model.h" />
     <ClInclude Include="Example.h" />
+    <ClInclude Include="Generator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
