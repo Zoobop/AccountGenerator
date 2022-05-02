@@ -13,7 +13,7 @@ When the program starts, the application interface appears and is used similarly
 
 By inputing the '**help**' command, as described at the top of the screen, it displays the list of commands used to interact with the local database.
 
-Codewise, the data structures used to store information such as the 'commands' and the 'database registry' were ```mtk::Map<TKey, TVal>``` and ```mtk::List<T>``` respectively. There were also a few utility methods used from the ```mtk::StringUtils``` class to help with parsing user input.
+Codewise, the data structures used to store information such as the 'commands' and the 'database registry' were ```mtk::Map<TKey, TVal>``` and ```mtk::List<T>``` respectively. There were also a few string utility methods used from to help with parsing user input.
 
 ## Adding New User (Manual)
 ![Adding New User](https://github.com/Zoobop/AccountGenerator/blob/master/gitImages/accountGen_i3.png "Adding New User")
@@ -27,4 +27,4 @@ To save new user to the database, you must also '**commit**' to see a persistent
 
 The '**generate**' is the main function of this program. The implementation of this function used ```mtk::List<T>``` multiple times to store random names and symbols. The ```mtk::Random``` utility class was also used to randomize the values of the users' email, username, and password. The command has one parameter 'amount' that is required to specify the number of new accounts to generate.
 
-Remember, to see a persistent change in the local databse, you must use the '**commit**' command after successful generation.
+Remember, to see a persistent change in the local database, you must use the '**commit**' command after successful generation.
