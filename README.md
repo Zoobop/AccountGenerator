@@ -27,4 +27,4 @@ To save new user to the database, you must also '**commit**' to see a persistent
 
 The '**generate**' is the main function of this program. The implementation of this function used ```mtk::List<T>``` multiple times to store random names and symbols. The ```mtk::Random``` utility class was also used to randomize the values of the users' email, username, and password. The command has one parameter 'amount' that is required to specify the number of new accounts to generate.
 
-Remember, to see a persistent change in the local database, you must use the '**commit**' command after successful generation.
+Remember: to see a persistent change in the local database, you must use the '**commit**' command after successful generation.
